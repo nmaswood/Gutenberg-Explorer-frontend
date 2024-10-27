@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000';  // Replace this with your FastAPI base URL
+const API_URL = 'https://gutenberg-explorer-back-1b3df3bcf947.herokuapp.com';  // Replace this with your FastAPI base URL
 
 
 

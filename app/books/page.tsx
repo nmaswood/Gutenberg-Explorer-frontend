@@ -8,7 +8,7 @@ import AnalysisModal from './components/AnalysisModal';
 interface BookMetadata {
   title: string;
   publisher: string;
-  [key: string]: any; // For any additional metadata fields
+  [key: string]: string; // For any additional metadata fields
 }
 
 interface Book {

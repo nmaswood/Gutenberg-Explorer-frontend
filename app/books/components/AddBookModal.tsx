@@ -25,8 +25,8 @@ const AddBookModal: React.FC<AddBookModalProps> = ({ isOpen, onClose, onBookAdde
       setBookId('');
       onBookAdded(); // Trigger parent refresh
       onClose(); // Close modal immediately after success
-    } catch (err) {
-      setError('Failed to add book');
+    } catch (error) {
+      setError('Failed to add book: ' + (error as Error).message); // Display error message
     } finally {
       setIsSubmitting(false);
     }
