@@ -9,7 +9,7 @@ interface AddBookResponse {
   book_metadata: {
     title: string;
     publisher: string;
-    [key: string]: any;
+    [key: string]: string;
   };
 }
 
