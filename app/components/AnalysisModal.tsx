@@ -1,4 +1,3 @@
-// components/AnalysisModal.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -15,17 +14,17 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
   bookId,
   onClose,
 }) => {
-  const [analysis, setAnalysis] = useState<string[]>([]);
+  const [analysis, setAnalysis] = useState<string>("");
   const [loading, setLoading] = useState(false);
 
   const typeAnalysis = (text: string) => {
     const words = text.split(" ");
     let index = 0;
-    setAnalysis([]);
+    setAnalysis(""); // Reset analysis before typing
 
     const typingInterval = setInterval(() => {
       if (index < words.length) {
-        setAnalysis((prev) => [...prev, words[index]]);
+        setAnalysis((prev) => prev + (prev.length ? " " : "") + words[index]);
         index++;
       } else {
         clearInterval(typingInterval);
@@ -38,9 +37,9 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
       setLoading(true);
       try {
         const result = await getBookAnalysis(bookId);
-        typeAnalysis(result.analysis);
+        typeAnalysis(result); // Directly use the complete result
       } catch (error) {
-        setAnalysis(["Failed to fetch analysis."]);
+        setAnalysis("Failed to fetch analysis.");
         console.error("Error fetching book analysis:", error);
       } finally {
         setLoading(false);
@@ -73,7 +72,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
             {loading ? (
               "Analyzing..."
             ) : (
-              <p>{analysis.join(" ")}</p>
+              <p>{analysis}</p> // Display the typed analysis
             )}
           </div>
         </div>
