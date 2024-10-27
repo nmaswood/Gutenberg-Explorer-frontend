@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getBookAnalysis } from "../../../lib/api";
+import { getBookAnalysis } from "../../lib/api";
 
 interface AnalysisModalProps {
   isOpen: boolean;

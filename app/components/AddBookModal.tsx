@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addBook } from '../../../lib/api';
+import { addBook } from '../../lib/api';
 
 interface AddBookModalProps {
   isOpen: boolean;
