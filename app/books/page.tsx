@@ -73,15 +73,9 @@ const BooksPage = () => {
   }, []);
 
 
-  const handleAddBookClick = () => {
-    setIsModalOpen(true); // Open the modal when button is clicked
-  };
 
-  const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
-  };
 
-  const renderMetadataValue = (key: string, value: any) => {
+  const renderMetadataValue = (key: string, value: string) => {
     if (value === null) return <span className="text-gray-400">-</span>;
 
     // Check for 'author_webpage' and render a link if it exists
