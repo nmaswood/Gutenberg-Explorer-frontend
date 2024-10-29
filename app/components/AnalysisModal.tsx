@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { getBookAnalysis } from "../../lib/api";
 import { BookOpen, ChevronRight, Loader2 } from "lucide-react";
 
@@ -19,7 +19,6 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
   bookId,
   onClose,
 }) => {
-  const [analysis, setAnalysis] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [sections, setSections] = useState<AnalysisSection[]>([]);
 
@@ -39,7 +38,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
       });
   };
 
-  const typeAnalysis = (text: string) => {
+  const typeAnalysis = useCallback((text: string) => {
     const parsedSections = parseAnalysisIntoSections(text);
     let currentSectionIndex = 0;
     let currentWordIndex = 0;
@@ -75,7 +74,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
     };
 
     typeNextWord();
-  };
+  }, []);
 
   useEffect(() => {
     const fetchAnalysis = async () => {
@@ -95,7 +94,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
     };
 
     if (isOpen) fetchAnalysis();
-  }, [isOpen, bookId]);
+  }, [isOpen, bookId, typeAnalysis]);
 
   if (!isOpen) return null;
 
@@ -106,7 +105,7 @@ const AnalysisModal: React.FC<AnalysisModalProps> = ({
         <div className="flex items-center justify-between border-b p-4">
           <div className="flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-blue-600" />
-            <h2 className="text-xl font-semibold text-gray-900">Book Analysis</h2>
+            <h2 className="text-xl font-semibold text-gray-900">Literary Analysis</h2>
           </div>
           <button
             onClick={onClose}
